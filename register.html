@@ -1,0 +1,342 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>当当网注册页面</title>
+<link href="css/global.css" rel="stylesheet" type="text/css" />
+<link href="css/layout.css" rel="stylesheet" type="text/css" />
+<style>
+	.msg{color:gray;}
+	.msg2{color:#ff3333;background-color:#ffcc99;border:solid 1px gray;line-height:18px;padding: 5px 10px;}
+</style>
+
+</head>
+
+<body>
+<div id="header">
+<div id="register_header">
+   <div class="register_header_left"><img src="images/logo.gif" alt="logo"></div>
+   <div class="register_header_right"><a href="index.html" class="blue">首页</a> | <a href="product.html" class="blue">商品展示页</a>  | <a href="shopping.html" class="blue">购物车</a> |  <a href="login.html" class="blue">登录</a></div>
+   </div>
+</div>
+<div id="main">
+  <div class="register_content">
+    <div class="register_top_bg"></div> 
+    <div class="register_mid_bg">
+      <ul>
+        <li class="register_mid_left">填写注册信息</li>
+        <li class="register_mid_mid">2. 邮箱验证</li>
+        <li class="register_mid_right">3. 完成注册</li>
+    </ul>
+    </div>
+    <div class="register_top_bg_mid">
+    <div class="register_top_bg_two_left"></div>
+    <div class="register_top_bg_two_right"></div>
+    <div class="register_title_bg"><img src="images/register_pic_02.gif" alt="欢迎注册"><br>您所提供的资料不会做其他用途，敬请安心填写。</div>
+    </div>
+    <div class="register_dotted_bg"></div>
+    <div class="register_message">
+    
+
+	
+	<!--注册表单开始-->
+	<form action="abc.php" method="post" id="myform" onsubmit="return checkForm()" >
+     <dl class="register_row">
+        <dt>Email地址：</dt>
+		<!--onfocus表示鼠标移动到输入框 onblur 鼠标离开输入框 -->
+		<dd><input id="email" type="text" class="register_input" onfocus="focusEmail()" onblur="blurEmail()"/>
+			<span id="emailMsg" class="msg"></span>
+		</dd>
+      </dl>
+      <dl class="register_row">
+         <dt>设置昵称：</dt>
+         <dd><!--不能为空-->
+			<input name="nickName" type="text" class="register_input"  />
+			<span id="nickMsg" class="msg"></span>
+		 </dd>
+         <dd></dd>
+      </dl>
+     <dl class="register_row">
+         <dt>设定密码：</dt>
+         <dd><input id="pwd" type="password" class="register_input" onfocus="focusPwd()" onblur="blurPwd()" />
+		 <span id="pswdMsg" class="msg"></span></dd>
+     </dl> 
+     <dl class="register_row"> 
+         <dt>再输入一次密码：</dt>
+         <dd><input id="repwd" type="password" class="register_input" onfocus="focusPwd2()" onblur="blurPwd2()"/>
+		 <span id="pswdMsg2" class="msg"></span></dd>
+     </dl>
+     <dl class="register_row">
+        <dt>性别：</dt>
+        <dd>	<label><input name="sex" type="radio" value="男" checked /> 男</label></dd>
+		<dd>	<label><input name="sex" type="radio" value="女" /> 女</label>
+			<span id="sexMsg" class="msg"></span></dd>
+		</dd>
+     </dl>
+
+	  <dl class="register_row">
+        <dt>爱好：</dt>
+        <dd>	<label><input name="aihao" type="checkbox" value="篮球" /> 篮球</label></dd>
+		<dd>	<label><input name="aihao" type="checkbox" value="足球" /> 足球</label>
+			<span id="aihaoMsg" class="msg"></span></dd>
+		</dd>
+     </dl>
+
+     <dl class="register_row">
+        <dt>所在地区：</dt>
+        <dd><select id="province" name="province" onfocus="focusDiqu()" onblur="blurDiqu()"/>
+				<option value="" >请选择</option>
+				<option value="1" >北京</option>
+				<option value="2" >山东</option>
+				<option value="3" >河北</option>
+				<option value="4" >内蒙</option>
+				<option value="5" >上海</option>
+				<option value="99" >其他</option>
+		</select>
+		<span id="proMsg" class="msg"></span></dd>
+        <dd></dd>
+      </dl>
+      <div class="registerBtn"><input id="registerBtn" type="image" src="images/register_btn_out.gif"></div>
+   </form>
+	<!--登录表单结束-->
+
+
+
+
+    </div>
+    
+    
+  </div>
+  </div>
+<!--网站版权部分开始-->
+<div id="footer">
+<iframe src="footer.html" height="50px" width="900px" frameborder="0"></iframe>
+</div>
+<script type="text/javascript">
+
+	//计数器
+	var aihao_count = 0;
+	function checkForm()
+	{
+		//先看看电子邮件是否ok
+		if(blurEmail() == false)
+		{
+			return false;
+		}
+		//密码
+		if(blurPwd() == false)
+		{
+			return false;
+		}
+		//第二个密码
+		if(blurPwd2() == false)
+		{
+			return false;
+		}
+		//爱好
+		if(checkAihao() == false)
+		{
+			return false;
+		}
+		//地区
+		if(blurDiqu() == false)
+		{
+			return false;
+		}
+
+		return true;
+
+	}
+
+	//检测复选框中，是否选择的有爱好
+	function checkAihao()
+	{
+		//检测复选框中，是否选择的有爱好
+		var aiHao = document.getElementsByName("aihao");
+		for(var i = 0; i < aiHao.length; i++)
+		{
+			//如果复选框的某个选择被选择了，则checked就为true
+			if(aiHao[i].checked == true)
+			{
+				aihao_count++;
+			}
+			
+		}
+
+		if(aihao_count == 0)
+		{
+			alert("必须选择至少一个爱好!");
+			//返回false，表单就会放弃提交!
+			return false;
+		}else
+		{
+			return true;
+		}
+	}
+	
+	//当鼠标移动输入框
+	function focusEmail()
+	{	
+		//1.先获取emailMsg对象
+		var emailMsg = $("emailMsg");
+		//2.给span提示信息
+		emailMsg.innerHTML = "请输入电子邮件!";
+		//3.给span设置样式
+		emailMsg.className = "msg2";
+		
+	}
+	//当鼠标离开输入框，对电子邮件格式进行校验
+	function blurEmail()
+	{
+		//1.获取email对象
+		var email = $("email");
+		var emailMsg = $("emailMsg");
+		//2我们认为，电子邮件不能为空，而且必须包含@
+		if(email.value == "")
+		{
+			//2.给span提示信息
+			emailMsg.innerHTML = "电子邮件不能为空!";
+			//3.给span设置样式
+			emailMsg.className = "msg2";
+			return false;
+
+		}else if(email.value.indexOf("@") == -1)
+		{
+			//2.给span提示信息
+			emailMsg.innerHTML = "电子邮件格式不对!";
+			//3.给span设置样式
+			emailMsg.className = "msg2";
+			return false;
+		}else
+		{
+			//如果上面两关都过，则提示成功!
+			//2.给span提示信息
+			emailMsg.innerHTML = "<img src='./images/register_write_ok.gif'>";
+			//3.给span设置样式
+			emailMsg.className = "msg";
+			return true;
+		}
+	}
+
+	//对密码的检测
+	function focusPwd()
+	{
+		//获取到pswdMsg对象
+		var pswdMsg = $("pswdMsg");
+		//给他提示信息
+		pswdMsg.innerHTML = "请输入密码";
+		pswdMsg.className = "msg2";
+
+	}
+
+	function blurPwd()
+	{
+		//先获取 pwd对象，然后判断他的值的情况
+		var pwd = $("pwd");
+		var pswdMsg = $("pswdMsg");
+		//过关
+		if(pwd.value == "")
+		{
+			pswdMsg.innerHTML = "密码不能为空";
+			pswdMsg.className = "msg2";
+			return false;
+		}else if(pwd.value.length < 6 )
+		{
+			pswdMsg.innerHTML = "密码的长度大于六位";
+			pswdMsg.className = "msg2";
+			return false;
+		}else
+		{
+			//如果上面两关都过，则提示成功!
+			//2.给span提示信息
+			pswdMsg.innerHTML = "<img src='./images/register_write_ok.gif'>";
+			//3.给span设置样式
+			pswdMsg.className = "msg";
+			return true;
+		}
+	}
+
+	//判断第二个密码框的输入
+	//对密码的检测
+	function focusPwd2()
+	{
+		//获取到pswdMsg对象
+		var pswdMsg2 = $("pswdMsg2");
+		//给他提示信息
+		pswdMsg2.innerHTML = "请输入密码";
+		pswdMsg2.className = "msg2";
+
+	}
+	function blurPwd2()
+	{
+		
+		//先获取 pwd2对象，然后判断他的值的情况
+		var repwd = $("repwd");
+		var pwd = $("pwd")
+		var pswdMsg2 = $("pswdMsg2");
+		//过关
+		if(repwd.value == "")
+		{
+			pswdMsg2.innerHTML = "密码不能为空";
+			pswdMsg2.className = "msg2";
+			return false;
+		}else if(repwd.value.length < 6 )
+		{
+			pswdMsg2.innerHTML = "密码的长度大于六位";
+			pswdMsg2.className = "msg2";
+			return false;
+		}else if(repwd.value != pwd.value)
+		{
+			//要求第二次输入的密码和第一次输入的密码保持一致
+			pswdMsg2.innerHTML = "输入的密码必须和上面的一样";
+			pswdMsg2.className = "msg2";
+			return false;
+		}
+		else
+		{
+			//如果上面两关都过，则提示成功!
+			//2.给span提示信息
+			pswdMsg2.innerHTML = "<img src='./images/register_write_ok.gif'>";
+			//3.给span设置样式
+			pswdMsg2.className = "msg";
+			return true;
+		}
+	}
+
+	//校验一下地区是否选择了
+	function focusDiqu()
+	{
+		var proMsg = $("proMsg");
+		proMsg.innerHTML = "必须选择地区";
+		proMsg.className = "msg2";
+
+	}
+
+	function blurDiqu()
+	{
+		//获取到地区
+		var diqu = $("province");
+		var proMsg = $("proMsg");
+		
+		//过关闯将
+		if(diqu.value == "")
+		{
+			proMsg.innerHTML = "朋友，你忘记选择地区了";
+			proMsg.className = "msg2";
+			return false;
+		}else
+		{
+			//2.给span提示信息
+			proMsg.innerHTML = "<img src='./images/register_write_ok.gif'>";
+			//3.给span设置样式
+			proMsg.className = "msg";
+			return true;
+		}
+	}
+	function $(id)
+	{
+		return document.getElementById(id);
+	}
+</script>
+</body>
+</html>
